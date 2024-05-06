@@ -62,7 +62,6 @@ const FormikField = forwardRef<FormikFieldHandler, Props>( function FormikField(
 			} )
 			textRef.current?.addEventListener( 'paste', ( evt ) => {
 				evt.preventDefault()
-				const el = evt.target as HTMLInputElement
 				const contents = evt.clipboardData?.getData( 'text' )
 				const phone = contents?.replace( / /g, '' )
 				if ( phone ) {
@@ -76,7 +75,7 @@ const FormikField = forwardRef<FormikFieldHandler, Props>( function FormikField(
 	const textRef = useRef<HTMLInputElement>( null )
 
 	return (
-		<div className="flex flex-col gap-2 relative">
+		<div className="flex flex-col gap-2 relative text-base">
 			<label className="w-fit" htmlFor={name}>
 				<span className="">{label}</span>
 				{requiredIcon}

@@ -26,7 +26,7 @@ const Button: FunctionComponent<Props> = ( props ) => {
 	return (
 		<button
 			className={cn(
-				'py-2 px-4 text-xs flex items-center gap-2 rounded-lg border border-transparent transition-default w-fit',
+				'py-2 px-4 text-base flex items-center gap-2 rounded-lg border border-transparent transition-default w-fit',
 				' hover:border-gray-800/50 dark:hover:border-white/25',
 				// variant
 				[
