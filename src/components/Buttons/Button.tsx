@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactNode } from 'react'
+import { FunctionComponent, ReactNode } from 'react'
 import Spinner from '@/components/Icons/Spinner'
 import { cn } from '@/lib/utils'
 
