@@ -39,7 +39,7 @@ export const generateValidationSchema = ( fields: IDynamicForm[] ) => {
 				/^\d*$/,
 				( { label }: { label: string } ) => `${label} must be number only`
 			)
-		if ( field.type === 'phone' )
+		if ( field.type === 'tel' )
 			validations = validations.matches(
 				/^\+?[0-9]\d*$/,
 				'Phone number is not valid'

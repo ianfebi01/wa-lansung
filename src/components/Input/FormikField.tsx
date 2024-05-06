@@ -1,4 +1,4 @@
-import { forwardRef, useMemo } from 'react'
+import { ChangeEvent, forwardRef, useEffect, useMemo, useRef } from 'react'
 import { useField } from 'formik'
 import { Switch } from '@headlessui/react'
 import { cn } from '@/lib/utils'
@@ -7,6 +7,7 @@ interface Props {
   name: string
   label: string
   placeholder: string
+  type?: string
   fieldType?:
     | 'text'
     | 'image'
@@ -39,6 +40,7 @@ const FormikField = forwardRef<FormikFieldHandler, Props>( function FormikField(
 		required,
 		disabled = false,
 		loading,
+		type = 'text',
 	} = props
 
 	const [field, meta, helpers] = useField( name )
@@ -48,6 +50,30 @@ const FormikField = forwardRef<FormikFieldHandler, Props>( function FormikField(
 		else if ( required && !disabled )
 			return <span className="text-red-500">*</span>
 	}, [] )
+
+	useEffect( () => {
+		if ( type === 'tel' ) {
+			textRef.current?.addEventListener( 'keypress', ( evt ) => {
+				evt = evt || window.event
+				const charCode = evt.which ? evt.which : evt.keyCode
+				if ( charCode != 43 && charCode > 31 && ( charCode < 48 || charCode > 57 ) )
+					evt.preventDefault()
+				else return true
+			} )
+			textRef.current?.addEventListener( 'paste', ( evt ) => {
+				evt.preventDefault()
+				const el = evt.target as HTMLInputElement
+				const contents = evt.clipboardData?.getData( 'text' )
+				const phone = contents?.replace( / /g, '' )
+				if ( phone ) {
+					const newValue = phone.replace ( /(?!\+)\D/g, '' )
+					el.value = newValue
+				}
+			} )
+		}
+	}, [] )
+
+	const textRef = useRef<HTMLInputElement>( null )
 
 	return (
 		<div className="flex flex-col gap-2 relative">
@@ -64,7 +90,7 @@ const FormikField = forwardRef<FormikFieldHandler, Props>( function FormikField(
 					) : (
 						<input
 							id={name}
-							type="text"
+							type={type}
 							placeholder={placeholder}
 							{...field}
 							className={cn(
@@ -78,6 +104,7 @@ const FormikField = forwardRef<FormikFieldHandler, Props>( function FormikField(
 								]
 							)}
 							disabled={disabled}
+							ref={textRef}
 						/>
 					)}
 				</>

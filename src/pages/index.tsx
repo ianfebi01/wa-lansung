@@ -10,7 +10,7 @@ const Home = () => {
 	const fields: IDynamicForm[] = [
 		{
 			name        : 'phone',
-			type        : 'phone',
+			type        : 'tel',
 			placeholder : '08226431xxxx',
 			fieldType   : 'text',
 			label       : 'Nomor Wa',
@@ -83,6 +83,7 @@ const Home = () => {
   						name={item.name}
   						placeholder={item.placeholder}
   						key={item.name}
+  						type={item.type}
   						fieldType={item.fieldType}
   						required={item.validation?.required}
   						select={item?.select}
