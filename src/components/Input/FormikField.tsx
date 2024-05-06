@@ -67,7 +67,7 @@ const FormikField = forwardRef<FormikFieldHandler, Props>( function FormikField(
 				const phone = contents?.replace( / /g, '' )
 				if ( phone ) {
 					const newValue = phone.replace ( /(?!\+)\D/g, '' )
-					el.value = newValue
+					helpers.setValue( newValue )
 				}
 			} )
 		}
