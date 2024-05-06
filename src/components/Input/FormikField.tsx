@@ -1,4 +1,4 @@
-import { ChangeEvent, forwardRef, useEffect, useMemo, useRef } from 'react'
+import { forwardRef, useEffect, useMemo, useRef } from 'react'
 import { useField } from 'formik'
 import { Switch } from '@headlessui/react'
 import { cn } from '@/lib/utils'
